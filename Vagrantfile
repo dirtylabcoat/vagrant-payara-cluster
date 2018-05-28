@@ -5,6 +5,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.vm.define "payara-box#{i}" do |box|
             box.vm.box = BOX_IMAGE
             box.vm.hostname = "payara-box#{i}"
+            n = 100 + i
+            box.vm.network :private_network, ip: "10.0.0.#{n}"
             box.vm.provider :virtualbox do |vb|
                 vb.name = "payara-box#{i}"
                 vb.customize ["modifyvm", :id, "--memory", "1024"]
